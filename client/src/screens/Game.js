@@ -163,8 +163,11 @@ const Game = (props) => {
         });
     }, [socket]);
 
-    useEffect(() => {
-        if (winner) { dispatch(updatePoints({ userName: localStorage.getItem('userName'), points: pointsToUpdate })); dispatch(getScoreboard()); }
+    useEffect(async () => {
+        if (winner) {
+            await dispatch(updatePoints({ userName: localStorage.getItem('userName'), points: pointsToUpdate }));
+            dispatch(getScoreboard());
+        }
     }, [winner])
 
     //HANDLE WIN
