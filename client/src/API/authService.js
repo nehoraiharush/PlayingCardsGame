@@ -21,11 +21,10 @@ export const updatePoints = async (data) => {
 }
 
 export const getScoreboard = async () => {
-
+    console.log("GETTTT")
     const res = await axios.get(BASE_URL + '/getAll');
     if (res.data)
-        if (res.data.status) localStorage.setItem('scoreboard', JSON.stringify(res.data.message));
-
+        if (res.data.status) { localStorage.setItem('scoreboard', JSON.stringify(res.data.message)); console.log("SS") }
     return res.data;
 }
 

@@ -57,7 +57,6 @@ router.post('/Login', async (req, res) => {
                             });
                         });
                 } else {
-                    console.log(`There is already player online named ${req_userName}`)
                     return res.status(200).json({
                         status: false,
                         message: `There is already player online named ${req_userName}`
@@ -122,7 +121,7 @@ router.post('/logout', async (req, res) => {
                         .then(updated => {
                             return res.status(200).json({
                                 status: true,
-                                message: `${userName} has been loged out`
+                                message: `${userName} has been logged out`
                             })
                         })
                         .catch(err => {

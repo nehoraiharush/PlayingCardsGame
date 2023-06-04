@@ -154,21 +154,28 @@ const Game = (props) => {
         socket.on("get_room_name", (data) => { setSelectedRoom(data); });
         socket.on("disconnected", () => Exit(selectedRoom));
         socket.on("connected", () => { setConnection(true); setSearching(false); setStartTime(Date.now()) });
-        socket.on("TIEONPOINTS", () => setTieGame(true));
+        socket.on("TIEONPOINTS", (data) => {
+            setPointsToUpdated(data);
+            setTieGame(true)
+            Dispatch()
+        });
         socket.on("winner", (data) => {
             if (pointsToUpdate === 0) {
                 setPointsToUpdated(data);
                 setWinner(true)
             }
         });
+        socket.on("loser", () => { Dispatch(); console.log("TT") })
     }, [socket]);
 
-    useEffect(async () => {
-        if (winner) {
-            await dispatch(updatePoints({ userName: localStorage.getItem('userName'), points: pointsToUpdate }));
-            dispatch(getScoreboard());
-        }
+    useEffect(() => {
+        if (winner) Dispatch();
     }, [winner])
+    //DISPATCH
+    const Dispatch = async () => {
+        if (pointsToUpdate > 0) await dispatch(updatePoints({ userName: localStorage.getItem('userName'), points: pointsToUpdate }));
+        await dispatch(getScoreboard());
+    }
 
     //HANDLE WIN
     useEffect(() => {
@@ -244,7 +251,7 @@ const Game = (props) => {
                         <Row style={{ marginTop: '5%' }}>
                             <Col lg={6} style={{ display: 'flex', justifyContent: 'center' }} >
                                 {connected && <TimerCountdown
-                                    date={startTime + 300000}
+                                    date={startTime + 10000}
                                     intervalDelay={0}
                                     precision={3}
                                     ref={timerRef}

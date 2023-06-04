@@ -21,7 +21,7 @@ const Login = () => {
 
     const onSubmit = async () => {
         await dispatch(login(userName));
-        dispatch(getScoreboard())
+        await dispatch(getScoreboard())
     }
 
 
@@ -61,6 +61,7 @@ const Login = () => {
                                 </Col>
 
                                 <Col >
+                                    {message !== undefined && message !== '' ? <h3>{message}</h3> : null}
                                 </Col>
                                 <Col >
                                     <Form.Group>

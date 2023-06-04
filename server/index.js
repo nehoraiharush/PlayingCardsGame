@@ -57,12 +57,12 @@ io.on("connection", (socket) => {
         socket.to(data.selectedRoom).emit("recieve_card", data.selectedCard)
     });
 
-    socket.on("gameOver", (data) => {
+    socket.on("gameOver", async (data) => {
         const sum = data.cards.reduce((sum, card) => sum + card.value, 0);
         if (rooms[data.room] && rooms[data.room][0] && rooms[data.room][1]) {
             if (sum > 436) {
-                if (socket.id === rooms[data.room][0].id) rooms[data.room][0].emit("winner", sum);
-                else if (socket.id === rooms[data.room][1].id) rooms[data.room][1].emit("winner", sum);
+                if (socket.id === rooms[data.room][0].id) { await rooms[data.room][0].emit("winner", sum); rooms[data.room][1].emit("loser"); }
+                else if (socket.id === rooms[data.room][1].id) { await rooms[data.room][1].emit("winner", sum); rooms[data.room][0].emit("loser"); }
             }
             else if (sum === 436) {
                 rooms[data.room][0].emit("TIEONPOINTS", sum);

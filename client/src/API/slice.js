@@ -68,33 +68,44 @@ export const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.isLoading = false
+                if (!action.payload.status)
+                    state.message = action.payload.message
+                else state.message = ''
             })
             .addCase(login.rejected, (state, action) => {
-
                 state.isLoading = false;
                 state.isError = true;
-                state.message = action.payload
+                state.message = action.payload.message
             })
             .addCase(logout.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
-                state.message = action.payload
+                state.message = action.payload.message
+            })
+            .addCase(logout.fulfilled, (state, action) => {
+                if (!action.payload.status)
+                    state.message = action.payload.message
+                else state.message = ''
             })
             .addCase(updatePoints.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
-                state.message = action.payload
+                state.message = action.payload.message
+            })
+            .addCase(updatePoints.fulfilled, (state, action) => {
+                if (!action.payload.status)
+                    state.message = action.payload.message
+                else state.message = ''
             })
             .addCase(getScoreboard.pending, (state, action) => {
                 state.isLoading = true;
             })
             .addCase(getScoreboard.fulfilled, (state, action) => {
                 state.isLoading = false;
-                if (typeof action.payload.message === 'string' && action.payload.message === 'Players not found') {
-                    console.log("FITS")
+                if (!action.payload.status) {
                     if (localStorage.getItem('scoreboard')) localStorage.removeItem('scoreboard')
                     state.message = action.payload.message;
-                }
+                } else state.message = ''
             })
             .addCase(getScoreboard.rejected, (state, action) => {
                 state.isLoading = false;

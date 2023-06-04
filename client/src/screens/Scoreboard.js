@@ -14,8 +14,11 @@ const Scoreboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+
+        console.log("HH");
+        dispatch(getScoreboard());
         if (localStorage.getItem('scoreboard')) setScoreboard(JSON.parse(localStorage.getItem('scoreboard')));
-    }, []);
+    }, [navigate]);
 
     return (
         <>
@@ -60,7 +63,7 @@ const Scoreboard = () => {
                             ) :
                             (
                                 <Col style={{ fontSize: '30px', fontWeight: '700' }}>
-                                    <u>{message !== undefined ? message : "Some Error Occured: Please Check Your Connection"}</u>
+                                    <u>{message !== undefined && message !== '' ? message : "Some Error Occured: Please Check Your Connection"}</u>
                                 </Col>
                             )
                 }
