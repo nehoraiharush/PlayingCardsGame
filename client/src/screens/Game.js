@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { logout, updatePoints, getScoreboard } from '../API/slice.js';
 import { useDispatch } from 'react-redux';
 
-const URL = 'http://localhost:3001';
+const URL = 'https://nehoraiharush.github.io';
 const socket = io.connect(URL)
 
 const Game = (props) => {

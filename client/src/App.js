@@ -6,13 +6,14 @@ import Game from './screens/Game';
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <div>HHHH</div>
+      {/* <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/scoreboard' element={<Scoreboard />} />
           <Route path='/game' element={<Game />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </>
   );
 }

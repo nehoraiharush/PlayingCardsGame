@@ -6,7 +6,15 @@ import { Server } from 'socket.io';
 
 import { cards } from './cards.js';
 
-app.use(cors())
+
+const corsOptions = {
+    origin: 'https://nehoraiharush.github.io',
+    methods: ["GET", "POST"],
+    credentials: true, // If your frontend and backend use cookies or authentication headers
+};
+
+
+app.use(cors(corsOptions))
 
 import bp from 'body-parser';
 import mongoose from "mongoose";
@@ -26,8 +34,9 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000',
-        methods: ["GET", "POST"]
+        origin: 'https://nehoraiharush.github.io',
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 
