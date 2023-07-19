@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PlayingCardsGame/static/css/main.9d76bbe6.css",
+    "main.js": "/PlayingCardsGame/static/js/main.5255d036.js",
+    "index.html": "/PlayingCardsGame/index.html",
+    "main.9d76bbe6.css.map": "/PlayingCardsGame/static/css/main.9d76bbe6.css.map",
+    "main.5255d036.js.map": "/PlayingCardsGame/static/js/main.5255d036.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9d76bbe6.css",
+    "static/js/main.5255d036.js"
+  ]
+}
